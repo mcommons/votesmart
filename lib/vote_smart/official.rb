@@ -2,15 +2,16 @@ module VoteSmart
   
   class Official < Common
     
-    attr_accessor :id, :first_name, :nick_name, :middle_name, :last_name, :suffix, :title,
-                  :election_parties, :office_parties, :district_id, :district_name, :state_id
+    attr_accessor :id, :first_name, :preferred_name, :nick_name, :middle_name, :last_name, :suffix, :title,
+                  :election_parties, :district_id, :district_name, :state_id
     
-    attr_accessor :district, :office, :office_id, :party
+    attr_accessor :district, :office, :office_id, :party, :office_status
     
-    set_attribute_map "candidateId" => :id, "firstName" => :first_name, "nickName" => :nick_name,
+    set_attribute_map "candidateId" => :id, "firstName" => :first_name, "preferredName" => :preferred_name, "nickName" => :nick_name,
                       "middleName" => :middle_name, "lastName" => :last_name, "suffix" => :suffix,
                       "title" => :title, "electionParties" => :election_parties, "officeDistrictId" => :district_id,
-                      "officeDistrictName" => :district_name, "officeParties" => :party, "officeStateId" => :state_id
+                      "officeDistrictName" => :district_name, "officeParties" => :party, "officeStateId" => :state_id,
+                      "officeStatus" => :office_status
     
     def offices
       offices = Official.response_child(Address.get_office(self.id), "address", "office")
